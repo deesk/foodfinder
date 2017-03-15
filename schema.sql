@@ -23,3 +23,10 @@ CREATE TABLE customers(
   email VARCHAR(200) NOT NULL,
   password_digest VARCHAR(400) NOT NULL
 );
+
+CREATE TABLE comments(
+  id SERIAL PRIMARY KEY,
+  body TEXT,
+  item_id INTEGER,
+  customer_id INTEGER
+)
