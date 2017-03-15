@@ -1,0 +1,26 @@
+body {
+  text-align: center;
+}
+.specials{
+  margin: 0 auto;
+  width: 80%;
+}
+.special-item{
+  display: inline-block;
+  width: 30%;
+}
+.special-item img{
+  display: inline-block;
+  width: 60%;
+}
+
+.foodImage > img {
+  width: 40%;
+}
+
+.signin {
+  border: 1px solid black;
+  width: 23%;
+  padding: 5%;
+
+}

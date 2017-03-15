@@ -1,0 +1,10 @@
+
+<% @items.each do |item| %>
+  <div class="foodImage">
+    <h3> <%= item.name %> </h3>
+    <h3> $<%= item.price %> </h3>
+    <img src="<%= item.picture %>">
+
+    <h3> <%= item.info %> </h3>
+  </div>
+<% end %>
