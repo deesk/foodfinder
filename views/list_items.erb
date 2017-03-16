@@ -4,7 +4,32 @@
     <h3> <%= item.name %> </h3>
     <h3> $<%= item.price %> </h3>
     <img src="<%= item.picture %>">
-
     <h3> <%= item.info %> </h3>
   </div>
+
+  <% if logged_in? %>
+    <div class="comment">
+      <form action="/add_comment" method="post">
+        <input type="hidden" name="keyword" value="<%= params[:keyword]%>">
+        <input type="hidden" name="item_id" value="<%= item.id %>">
+        <textarea name="body"> </textarea>
+        <button> Add Comment </button>
+      </form>
+    </div>
+  <% end %>
+  <ul>
+    <% item.comments.each do |comment| %>
+      <li><%= comment.body %></li>
+      <%= comment.customer.email %> </li>
+
+    <% if logged_in? %>
+       <form action="/delete_comment" method="post">
+          <input type="hidden" name="_method" value="delete">
+          <input type="hidden" name="comment_id" value="<%= comment.id %>">
+          <input type="hidden" name="keyword" value="<%= params[:keyword]%>">
+          <button> delete </button>
+        </form>
+    <% end %>
+  </ul>
+ <% end %>
 <% end %>

@@ -8,15 +8,11 @@
 <body>
 
 <%if logged_in? %>
-Logged in as <%= current_customer.email %>
-
-<form action="/session" method="post">
-  <input type="hidden" name="_method" value="delete" >
-
-  <button>logout</button>
-</form>
-
-
+  Logged in as <%= current_customer.email %>
+  <form action="/session" method="post">
+    <input type="hidden" name="_method" value="delete" >
+    <button>logout</button>
+  </form>
 <% end %>
 
   <h1>Food Finder</h1>
@@ -24,7 +20,7 @@ Logged in as <%= current_customer.email %>
 
     <h3> Food Name </h3>
     <input type="text" name="keyword" placeholder="enter name of food">
-
+    $<input type="text" name="price" placeholder="max amount">
     <button>Search</button>
 
   </form>

@@ -5,6 +5,7 @@ require 'pg'
 require_relative 'database_config'
 require_relative 'models/item'
 require_relative 'models/customer'
+require_relative 'models/comment'
 
 enable :sessions
 
@@ -30,17 +31,17 @@ get '/' do
 end
 
 get '/search' do
-  if params[:keyword] == ""
-    erb :index
+  if params[:keyword].empty?
+    redirect '/'
   else
-    @items = Item.where("name ILIKE '%#{params[:keyword]}%'")
-    if @items.empty?
-      erb :not_found
-    else
-      erb :list_items
+      @items = Item.where("name ILIKE '%#{params[:keyword]}%' AND price <= #{params[:price].to_i}")
+      if @items.empty?
+        erb :not_found
+      else
+        erb :list_items
+      end
     end
   end
-end
 
 get '/signup' do
   erb :sign_up
@@ -56,7 +57,6 @@ post '/create_account' do
   customer.last_name = params[:lname]
   customer.email = params[:email]
   customer.password = params[:password]
-  customer.save
   if customer.save
     erb :account_created
   else
@@ -65,7 +65,6 @@ post '/create_account' do
 end
 
 post '/session' do
-
   customer = Customer.find_by(email: params[:email])
 
   if customer && customer.authenticate(params[:password])
@@ -74,6 +73,22 @@ post '/session' do
   else
     erb :login
   end
+end
+
+post '/add_comment' do
+  comment = Comment.new
+  comment.body = params[:body]
+  comment.item_id = params[:item_id]
+  comment.customer_id = session[:customer_id]
+  if comment.save
+    redirect "/search?keyword=#{params[:keyword]}"
+  end
+end
+
+delete '/delete_comment' do
+  comment = Comment.find(params[:comment_id])
+  comment.destroy
+  redirect "/search?keyword=#{params[:keyword]}"
 end
 
 delete '/session' do

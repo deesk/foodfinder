@@ -1,4 +1,4 @@
 class Item < ActiveRecord::Base
-  # has_one :stores
+  has_many :comments
   validates :name, presence: true
 end

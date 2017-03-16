@@ -1,15 +1,17 @@
 <a href="/signup"> Sign up </a>
 <a href="/login"> Log in </a>
 
-
 <h2> Today's Special </h2>
-<div class="specials">
-<% @specials.each do |ele| %>
-  <div class="special-item">
-    <img src="<%= @all_items[ele].picture %>">
-    <h4> <%= @all_items[ele].name %> </h3>
-    <h5> $<%= @all_items[ele].price %> </h3>
-    <h6> <%= @all_items[ele].info %> </h3>
-  </div>
+<% if logged_in? %>
+  <h2> 10% discount </h2>
 <% end %>
+<div class="specials">
+  <% @specials.each do |ele| %>
+    <div class="special-item">
+      <img src="<%= @all_items[ele].picture %>">
+      <h4> <%= @all_items[ele].name %> </h3>
+      <h5> $<%= @all_items[ele].price %> </h3>
+      <h6> <%= @all_items[ele].info %> </h3>
+    </div>
+  <% end %>
 </div>

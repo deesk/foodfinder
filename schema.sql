@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS items;
 CREATE TABLE items(
   id SERIAL4 PRIMARY KEY,
   name VARCHAR(300) NOT NULL,
-  price MONEY NOT NULL,
+  price decimal(10,2) NOT NULL,
   picture TEXT,
   info TEXT,
   store_id INTEGER

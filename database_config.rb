@@ -1,3 +1,4 @@
+
 require 'active_record'
 
 options = {
@@ -5,4 +6,5 @@ options = {
   database: 'foodfinder',
   username: 'sandesh'
 }
+
 ActiveRecord::Base.establish_connection(options)
